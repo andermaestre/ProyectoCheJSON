@@ -8,7 +8,7 @@
 </head>
 <body>
     
-    <div id="data">
+    <div id="data" style="height:500px">
         
     </div>
     <button onclick="getDatos()">
@@ -37,7 +37,14 @@
                     
                     personas.forEach(element => {
                         if(element.Id==id){
-                            document.getElementById("data").innerHTML = personas[id];
+                            document.getElementById("data").innerHTML += element.Id + "<br>";
+                            document.getElementById("data").innerHTML += element.FirstName+ "<br>";
+                            document.getElementById("data").innerHTML += element.LastName+ "<br>";
+                            document.getElementById("data").innerHTML += element.Honors+ "<br>";
+                            document.getElementById("data").innerHTML += element.CorrespondenceLanguage+ "<br>";
+                            document.getElementById("data").innerHTML += element.PreferredName+ "<br>";
+                            document.getElementById("data").innerHTML += element.PersonNumber+ "<br>";
+                            document.getElementById("data").innerHTML += element.MiddleName+ "<br>";
                         }
                         
                     });
@@ -62,12 +69,14 @@
                     console.log(personas);
                     var paTabla = "<table>";
                     personas.forEach(element => {
-                        paTabla = paTabla + "<tr><td><a href='javascript:getUno(element.Id)'>"
-                        paTabla = paTabla + element.LastName;
-                        paTabla = paTabla + element.FirstName;
-                        paTabla = paTabla + "<tr><td>";
+                        paTabla = paTabla + "<tr><th><a onClick='getUno("+element.Id+")'>"
+                        paTabla = paTabla + element.LastName + ",  ";
+                        paTabla = paTabla + element.FirstName + "</a>";
+                        paTabla = paTabla + "</th></tr>";
                     });
                     paTabla = paTabla + "</table>";
+
+                    document.getElementById("tabla").innerHTML = paTabla;
                 }
             }
             
