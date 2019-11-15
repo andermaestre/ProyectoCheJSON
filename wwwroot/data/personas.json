@@ -1,0 +1,31 @@
+
+[   
+    {
+        "Id":"1",
+    "Salutation" : "MS.",
+    "FirstName" : "Miranda",
+    "MiddleName" : "Kyle",
+    "LastName" : "Rachell",
+    "PreviousLastName" : null,
+    "NameSuffix" : "Jr.",
+    "DisplayName" : "Miranda Rachell",
+    "PreferredName" : "La Miran",
+    "Honors" : "Varonaise",
+    "CorrespondenceLanguage" : "catalan",
+    "PersonNumber" : "955160008184100"
+    }, 
+    {
+        "Id":"2",
+    "Salutation" : "MR.",
+    "FirstName" : "Jocob",
+    "MiddleName" : "Samual",
+    "LastName" : "George",
+    "PreviousLastName" : null,
+    "NameSuffix" : "Sr.",
+    "DisplayName" : "Jocob George",
+    "PreferredName" : "El Alto",
+    "Honors" : "Lord",
+    "CorrespondenceLanguage" : "Esperanto",
+    "PersonNumber" : "955160008184099"
+    }
+]

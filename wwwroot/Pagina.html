@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="data">
+        
+    </div>
+    <button onclick="getDatos()">
+
+    </button>
+
+    <div id="tabla">
+
+    </div>
+
+    <script>
+
+        function getUno(id){
+            alert('Un dato');
+            var xhttp2 = new XMLHttpRequest();
+            
+            
+    
+            xhttp2.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status==200){
+                    //document.getElementById("data").innerHTML = this.responseText;
+
+                    var personas = JSON.parse(this.responseText);
+
+                    
+                    
+                    personas.forEach(element => {
+                        if(element.Id==id){
+                            document.getElementById("data").innerHTML = personas[id];
+                        }
+                        
+                    });
+                    
+                }
+            }
+            
+            xhttp2.open('GET', "data/personas.json", true);
+            xhttp2.send();
+        }
+
+        
+        function getDatos(){
+            
+            alert('Muchos Datos');
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status==200){
+                    document.getElementById("tabla").innerHTML = this.responseText;
+
+                    var personas = JSON.parse(this.responseText);
+                    console.log(personas);
+                    var paTabla = "<table>";
+                    personas.forEach(element => {
+                        paTabla = paTabla + "<tr><td><a href='javascript:getUno(element.Id)'>"
+                        paTabla = paTabla + element.LastName;
+                        paTabla = paTabla + element.FirstName;
+                        paTabla = paTabla + "<tr><td>";
+                    });
+                    paTabla = paTabla + "</table>";
+                }
+            }
+            
+            xhttp.open('GET', "data/personas.json", true);
+            xhttp.send();
+            
+        }
+    </script>
+</body>
+</html>
