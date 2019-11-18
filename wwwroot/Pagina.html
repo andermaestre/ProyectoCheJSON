@@ -7,22 +7,34 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <div id="data" style="height:500px">
-        
+    <div style="display: flex; ">
+    <div id="data" style="height:230px;width:45%; background-color: cadetblue;padding:50px;">
+        <p>Dolares Trumpanianos:</p><p id="rateAmerica">  </p>
+        <p>Dolares Caneidianos:</p><p id="rateCanadian">  </p>
+        <p>Rublios:</p><p id="rateRub">  </p>
     </div>
-    <button onclick="getDatos()">
+    <div id="Resultados"style="height:230px;width:45%; background-color:yellow;padding:50px;">
+            <p>Resultado en Dolares Trumpanianos:</p><p id="resAmerica">  </p>
+            <p>Resultado en Dolares Caneidianos:</p><p id="resCanada">  </p>
+            <p>Resultado en Rublios:</p><p id="resRublos">  </p>
 
+    </div>
+</div>
+    <br>
+    <div style="display: flex; justify-content: center;background-color:lawngreen;">
+    <button onclick="getUno()"style="margin:20px;float:left;">
+        Tocame guapeton
     </button>
-
-    <div id="tabla">
-
-    </div>
+    <br/>
+    <textarea id="input" >
+    </textarea>
+</div>
+    
 
     <script>
-
-        function getUno(id){
-            alert('Un dato');
+        var personas;
+        function getUno(){
+            
             var xhttp2 = new XMLHttpRequest();
             
             
@@ -30,60 +42,30 @@
             xhttp2.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status==200){
                     //document.getElementById("data").innerHTML = this.responseText;
-
-                    var personas = JSON.parse(this.responseText);
-
-                    
-                    
-                    personas.forEach(element => {
-                        if(element.Id==id){
-                            document.getElementById("data").innerHTML += element.Id + "<br>";
-                            document.getElementById("data").innerHTML += element.FirstName+ "<br>";
-                            document.getElementById("data").innerHTML += element.LastName+ "<br>";
-                            document.getElementById("data").innerHTML += element.Honors+ "<br>";
-                            document.getElementById("data").innerHTML += element.CorrespondenceLanguage+ "<br>";
-                            document.getElementById("data").innerHTML += element.PreferredName+ "<br>";
-                            document.getElementById("data").innerHTML += element.PersonNumber+ "<br>";
-                            document.getElementById("data").innerHTML += element.MiddleName+ "<br>";
-                        }
-                        
-                    });
-                    
+                    document.getElementById("rateAmerica").innerHTML = "";
+                    document.getElementById("rateCanadian").innerHTML = "";
+                    document.getElementById("rateRub").innerHTML = "";
+                    document.getElementById("resAmerica").innerHTML = "";
+                    document.getElementById("resCanada").innerHTML = "";
+                    document.getElementById("resRublos").innerHTML = "";
+                    personas = JSON.parse(this.responseText);
+                    console.log(personas)   
+                    document.getElementById("rateAmerica").innerHTML += personas.rates.USD + "<br>";
+                    document.getElementById("rateCanadian").innerHTML += personas.rates.CAD + "<br>";
+                    document.getElementById("rateRub").innerHTML += personas.rates.RUB + "<br>";
+                    document.getElementById("resAmerica").innerHTML += personas.rates.USD * (document.getElementById("input").value) + "<br>";
+                    document.getElementById("resCanada").innerHTML += personas.rates.CAD * (document.getElementById("input").value) + "<br>";
+                    document.getElementById("resRublos").innerHTML += personas.rates.RUB * (document.getElementById("input").value) + "<br>";
+                      
                 }
             }
             
-            xhttp2.open('GET', "data/personas.json", true);
+            xhttp2.open('GET', "https://api.exchangeratesapi.io/latest", true);
             xhttp2.send();
         }
 
         
-        function getDatos(){
-            
-            alert('Muchos Datos');
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){
-                if(this.readyState == 4 && this.status==200){
-                    document.getElementById("tabla").innerHTML = this.responseText;
-
-                    var personas = JSON.parse(this.responseText);
-                    console.log(personas);
-                    var paTabla = "<table>";
-                    personas.forEach(element => {
-                        paTabla = paTabla + "<tr><th><a onClick='getUno("+element.Id+")'>"
-                        paTabla = paTabla + element.LastName + ",  ";
-                        paTabla = paTabla + element.FirstName + "</a>";
-                        paTabla = paTabla + "</th></tr>";
-                    });
-                    paTabla = paTabla + "</table>";
-
-                    document.getElementById("tabla").innerHTML = paTabla;
-                }
-            }
-            
-            xhttp.open('GET', "data/personas.json", true);
-            xhttp.send();
-            
-        }
+        
     </script>
 </body>
 </html>
